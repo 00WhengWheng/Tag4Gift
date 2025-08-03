@@ -1,6 +1,24 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "nxCloudId": "688f9ec3c171c8351f599946",
+  "projects": {
+    "main-e2e": {
+      "root": "apps/main-e2e",
+      "sourceRoot": "apps/main-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nx/jest:jest",
+          "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
+          "options": {
+            "jestConfig": "apps/main-e2e/jest.config.ts",
+            "passWithNoTests": true
+          },
+          "dependsOn": ["main:build", "main:serve"]
+        }
+      }
+    }
+  },
   "plugins": [
     {
       "plugin": "@nx/webpack/plugin",
@@ -17,7 +35,7 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["main-e2e/**/*"]
+      "exclude": []
     }
   ]
 }
