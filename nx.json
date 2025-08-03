@@ -85,7 +85,8 @@
       "exclude": [
         "business-e2e/**/*",
         "apps/admin-e2e/**/*",
-        "apps/main-e2e/**/*"
+        "apps/main-e2e/**/*",
+        "apps/business-e2e/**/*"
       ]
     },
     {
@@ -123,6 +124,22 @@
         "watchDepsTargetName": "watch-deps",
         "buildDepsTargetName": "build-deps",
         "typecheckTargetName": "typecheck"
+      }
+    },
+    {
+      "plugin": "@nx/expo/plugin",
+      "options": {
+        "startTargetName": "start",
+        "buildTargetName": "build",
+        "prebuildTargetName": "prebuild",
+        "serveTargetName": "serve",
+        "installTargetName": "install",
+        "exportTargetName": "export",
+        "submitTargetName": "submit",
+        "runIosTargetName": "run-ios",
+        "runAndroidTargetName": "run-android",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps"
       }
     }
   ],
