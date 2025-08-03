@@ -1,7 +1,54 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "nxCloudId": "688f9ec3c171c8351f599946",
+  "namedInputs": {
+    "default": ["{workspaceRoot}/jest.preset.js"],
+    "jestPreset": ["{workspaceRoot}/jest.preset.js"]
+  },
   "projects": {
+    "main": {
+      "root": "apps/main",
+      "sourceRoot": "apps/main/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "nx:run-commands",
+          "options": {
+            "command": "webpack-cli build",
+            "args": ["--node-env=production"]
+          },
+          "configurations": {
+            "development": {
+              "args": ["--node-env=development"]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nx/js:node",
+          "defaultConfiguration": "development",
+          "dependsOn": ["build"],
+          "options": {
+            "buildTarget": "main:build",
+            "runBuildTargetDependencies": false
+          },
+          "configurations": {
+            "development": {
+              "buildTarget": "main:build:development"
+            },
+            "production": {
+              "buildTarget": "main:build:production"
+            }
+          }
+        },
+        "test": {
+          "executor": "@nx/jest:jest",
+          "options": {
+            "jestConfig": "apps/main/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "main-e2e": {
       "root": "apps/main-e2e",
       "sourceRoot": "apps/main-e2e/src",
@@ -35,7 +82,41 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": []
+      "exclude": ["business-e2e/**/*", "apps/admin-e2e/**/*"]
+    },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "testTargetName": "test",
+        "serveTargetName": "serve",
+        "devTargetName": "dev",
+        "previewTargetName": "preview",
+        "serveStaticTargetName": "serve-static",
+        "typecheckTargetName": "typecheck",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps"
+      }
+    },
+    {
+      "plugin": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
     }
-  ]
+  ],
+  "generators": {
+    "@nx/web:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "vitest",
+      "e2eTestRunner": "playwright"
+    }
+  }
 }

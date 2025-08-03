@@ -1,6 +1,6 @@
 export default {
   displayName: 'main-e2e',
-  preset: '../jest.preset.js',
+  preset: '/home/fdm/Tag4Gift/jest.preset.js',
   globalSetup: '<rootDir>/../main-e2e/src/support/global-setup.ts',
   globalTeardown: '<rootDir>/../main-e2e/src/support/global-teardown.ts',
   setupFiles: ['<rootDir>/../main-e2e/src/support/test-setup.ts'],
