@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Game {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  category    String
+  entryPoint  String
+  challengeId String
+  challenge   Challenge @relation(fields: [challengeId], references: [id])
+  isPublished Boolean  @default(false)
+  version     String   @default("1.0.0")
+  playCount   Int      @default(0)
+  likes       Int      @default(0)
+  shares      Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model User {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  auth0Id     String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tags        Tag[]
+  shares      Share[]
+  challenges  Challenge[] @relation("ChallengeParticipants")
+}
+
+model Tenant {
+  id          String   @id @default(cuid())
+  name        String
+  email       String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  gifts       Gift[]
+  challenges  Challenge[]
+}
+
+model Tag {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  venue       String
+  createdAt   DateTime @default(now())
+}
+
+model Challenge {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  entryCost   Int
+  prize       String
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  participants User[]  @relation("ChallengeParticipants")
+  games       Game[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Gift {
+  id          String   @id @default(cuid())
+  type        String
+  value       String
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Share {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  platform    String
+  postUrl     String
+  createdAt   DateTime @default(now())
+}
