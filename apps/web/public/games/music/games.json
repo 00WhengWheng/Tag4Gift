@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Jukebox",
+    "description": "Play your favorite tunes.",
+    "entry": "jukebox/index.html"
+  },
+  {
+    "title": "Music Rhythm",
+    "description": "Match the rhythm to win.",
+    "entry": "music-rhythm/index.html"
+  }
+]

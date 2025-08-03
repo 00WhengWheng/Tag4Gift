@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Flappy Plane",
+    "description": "Navigate the plane through obstacles.",
+    "entry": "flappy-plane/index.html"
+  },
+  {
+    "title": "Road Cross",
+    "description": "Help the character cross the road safely.",
+    "entry": "road-cross/index.html"
+  }
+]

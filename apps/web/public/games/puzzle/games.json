@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Anxious Side",
+    "description": "Solve the puzzle to calm the anxious side.",
+    "entry": "anxious-side/index.html"
+  },
+  {
+    "title": "Parking Jam",
+    "description": "Unblock the parking lot.",
+    "entry": "parking-jam/index.html"
+  }
+]
