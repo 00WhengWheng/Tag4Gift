@@ -82,7 +82,11 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["business-e2e/**/*", "apps/admin-e2e/**/*"]
+      "exclude": [
+        "business-e2e/**/*",
+        "apps/admin-e2e/**/*",
+        "apps/main-e2e/**/*"
+      ]
     },
     {
       "plugin": "@nx/eslint/plugin",
