@@ -64,6 +64,136 @@
           "dependsOn": ["main:build", "main:serve"]
         }
       }
+    },
+    "business": {
+      "root": "apps/business",
+      "sourceRoot": "apps/business/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nx/js:node",
+          "options": {
+            "outputPath": "dist/apps/business"
+          }
+        },
+        "serve": {
+          "executor": "@nx/js:node",
+          "options": {
+            "buildTarget": "business:build"
+          }
+        },
+        "test": {
+          "executor": "@nx/jest:jest",
+          "options": {
+            "jestConfig": "apps/business/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "admin": {
+      "root": "apps/admin",
+      "sourceRoot": "apps/admin/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nx/js:node",
+          "options": {
+            "outputPath": "dist/apps/admin"
+          }
+        },
+        "serve": {
+          "executor": "@nx/js:node",
+          "options": {
+            "buildTarget": "admin:build"
+          }
+        },
+        "test": {
+          "executor": "@nx/jest:jest",
+          "options": {
+            "jestConfig": "apps/admin/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "web": {
+      "root": "apps/web",
+      "sourceRoot": "apps/web/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nx/vite:build",
+          "options": {
+            "outputPath": "dist/apps/web"
+          }
+        },
+        "serve": {
+          "executor": "@nx/vite:dev",
+          "options": {
+            "buildTarget": "web:build"
+          }
+        },
+        "test": {
+          "executor": "@nx/vite:test",
+          "options": {
+            "jestConfig": "apps/web/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "web-mobile": {
+      "root": "apps/web-mobile",
+      "sourceRoot": "apps/web-mobile/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nx/expo:build",
+          "options": {
+            "outputPath": "dist/apps/web-mobile"
+          }
+        },
+        "serve": {
+          "executor": "@nx/expo:start",
+          "options": {
+            "buildTarget": "web-mobile:build"
+          }
+        },
+        "test": {
+          "executor": "@nx/jest:jest",
+          "options": {
+            "jestConfig": "apps/web-mobile/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "dashboard-mobile": {
+      "root": "apps/dashboard-mobile",
+      "sourceRoot": "apps/dashboard-mobile/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nx/expo:build",
+          "options": {
+            "outputPath": "dist/apps/dashboard-mobile"
+          }
+        },
+        "serve": {
+          "executor": "@nx/expo:start",
+          "options": {
+            "buildTarget": "dashboard-mobile:build"
+          }
+        },
+        "test": {
+          "executor": "@nx/jest:jest",
+          "options": {
+            "jestConfig": "apps/dashboard-mobile/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "plugins": [
